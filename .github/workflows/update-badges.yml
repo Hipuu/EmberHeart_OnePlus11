@@ -26,7 +26,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
         run: |
-          echo "STATUS=${{ github.event.workflow_run.conclusion }}" >> $GITHUB_ENV
+          echo "BUILD_STATUS=${{ github.event.workflow_run.conclusion }}" >> $GITHUB_ENV
 
           # take the head_sha from the workflow that just finished
           SHA=${{ github.event.workflow_run.head_sha }}
