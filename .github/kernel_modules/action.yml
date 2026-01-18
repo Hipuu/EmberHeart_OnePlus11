@@ -189,6 +189,13 @@ runs:
         job-summary: 'CCache stats'
         evict-old-files: 'job'
 
+    - name: Clone kernel patches for msm kernel
+      shell: bash
+      run: |
+        set -euo pipefail
+        echo "Cloning kernel patches for msm kernel..."
+        git clone --depth=1 https://github.com/nullptr-t-oss/kernel_patches.git my_patches
+
     - name: Clean Up ABI Protected Exports
       shell: bash
       run: |
@@ -243,6 +250,18 @@ runs:
 
         CONFIG_CAN_SLCAN=m
         EOF
+
+    - name: Add my kernel patches to msm kernel
+      shell: bash
+      run: |
+        set -euo pipefail
+        echo "Applying kernel patches to msm kernel from my repo..."
+        cd "$CONFIG/kernel_platform/msm-kernel"
+
+        for patch_file in ../../../my_patches/kernel_patches/op11/msm/*.patch; do
+            echo "Applying patch: $patch_file"
+            patch -p1 < "$patch_file"
+        done
 
     - name: Add memkernel module
       shell: bash
