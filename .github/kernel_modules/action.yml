@@ -323,8 +323,8 @@ runs:
         
         cd "$MSM"
 
-        # Merge defconfig fragments from vendor/kalama_GKI.config
-        cat arch/arm64/configs/vendor/kalama_GKI.config >> ./arch/arm64/configs/gki_defconfig
+        # Merge defconfig fragments from vendor/pineapple_GKI.config
+        cat arch/arm64/configs/vendor/pineapple_GKI.config >> ./arch/arm64/configs/gki_defconfig
 
         # Thin LTO
         echo "CONFIG_LTO_CLANG_THIN=y" >> ./arch/arm64/configs/gki_defconfig                                                                            
@@ -344,9 +344,9 @@ runs:
         #QCA_WLAN_DIR="$GITHUB_WORKSPACE/$CONFIG/vendor/qcom/opensource/wlan/qcacld-3.0/"
         
         #cd "$MSM"
-        #make -C ../../vendor/qcom/opensource/datarmnet-ext/aps M=../../vendor/qcom/opensource/datarmnet-ext/aps KERNEL_SRC=$KERNEL_PLATFORM/./msm-kernel O=$OUT LLVM=1 DEPMOD=depmod DTC=$KERNEL_PLATFORM/build/kernel/build-tools/path/linux-x86/dtc RMNET_CORE_INC_DIR=$CONFIG/vendor/qcom/opensource/datarmnet/core RMNET_CORE_PATH=vendor/qcom/opensource/datarmnet/core DATARMNET_CORE_PATH=datarmnet/core ANDROID_BUILD_TOP=$CONFIG KBUILD_MIXED_TREE=..//device/qcom/kalama-kernel
+        #make -C ../../vendor/qcom/opensource/datarmnet-ext/aps M=../../vendor/qcom/opensource/datarmnet-ext/aps KERNEL_SRC=$KERNEL_PLATFORM/./msm-kernel O=$OUT LLVM=1 DEPMOD=depmod DTC=$KERNEL_PLATFORM/build/kernel/build-tools/path/linux-x86/dtc RMNET_CORE_INC_DIR=$CONFIG/vendor/qcom/opensource/datarmnet/core RMNET_CORE_PATH=vendor/qcom/opensource/datarmnet/core DATARMNET_CORE_PATH=datarmnet/core ANDROID_BUILD_TOP=$CONFIG KBUILD_MIXED_TREE=..//device/qcom/pineapple-kernel
         
-        #make -C ../../vendor/qcom/opensource/wlan/platform M=../../vendor/qcom/opensource/wlan/platform KERNEL_SRC=$KERNEL_PLATFORM/./msm-kernel O=$OUT LLVM=1 DEPMOD=depmod DTC=$KERNEL_PLATFORM/build/kernel/build-tools/path/linux-x86/dtc WLAN_PLATFORM_ROOT=$CONFIG/vendor/qcom/opensource/wlan/platform HAVE_ARCH_COMPILER_H=y CONFIG_CNSS_OUT_OF_TREE=y CONFIG_CNSS2=m CONFIG_CNSS2_QMI=y CONFIG_CNSS_QMI_SVC=m CONFIG_CNSS_PLAT_IPC_QMI_SVC=m CONFIG_CNSS_GENL=m CONFIG_WCNSS_MEM_PRE_ALLOC=m CONFIG_CNSS_UTILS=m CONFIG_BUS_AUTO_SUSPEND=y CONFIG_CNSS_HW_SECURE_DISABLE=y KERNEL_SUPPORTS_NESTED_COMPOSITES=n KBUILD_EXTRA_SYMBOLS=$OUT/sec-module-symvers_intermediates/Module.symvers ANDROID_BUILD_TOP=$CONFIG KBUILD_MIXED_TREE=..//device/qcom/kalama-kernel
+        #make -C ../../vendor/qcom/opensource/wlan/platform M=../../vendor/qcom/opensource/wlan/platform KERNEL_SRC=$KERNEL_PLATFORM/./msm-kernel O=$OUT LLVM=1 DEPMOD=depmod DTC=$KERNEL_PLATFORM/build/kernel/build-tools/path/linux-x86/dtc WLAN_PLATFORM_ROOT=$CONFIG/vendor/qcom/opensource/wlan/platform HAVE_ARCH_COMPILER_H=y CONFIG_CNSS_OUT_OF_TREE=y CONFIG_CNSS2=m CONFIG_CNSS2_QMI=y CONFIG_CNSS_QMI_SVC=m CONFIG_CNSS_PLAT_IPC_QMI_SVC=m CONFIG_CNSS_GENL=m CONFIG_WCNSS_MEM_PRE_ALLOC=m CONFIG_CNSS_UTILS=m CONFIG_BUS_AUTO_SUSPEND=y CONFIG_CNSS_HW_SECURE_DISABLE=y KERNEL_SUPPORTS_NESTED_COMPOSITES=n KBUILD_EXTRA_SYMBOLS=$OUT/sec-module-symvers_intermediates/Module.symvers ANDROID_BUILD_TOP=$CONFIG KBUILD_MIXED_TREE=..//device/qcom/pineapple-kernel
         
     - name: Filter modules
       shell: bash
