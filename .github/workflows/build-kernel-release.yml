@@ -88,11 +88,7 @@ jobs:
           done
           echo "]" >> matrix.json
         
-          input="OP11"
-          jq_filter="."
-          jq_filter="map(select(.model == \"$input\"))"
-        
-          filtered=$(jq -c "$jq_filter" matrix.json)
+          filtered=$(jq -c '.' matrix.json)
           wrapped=$(jq -n --argjson items "$filtered" '{ include: $items }')
         
           echo "matrix<<MATRIX_EOF" >> "$GITHUB_OUTPUT"
