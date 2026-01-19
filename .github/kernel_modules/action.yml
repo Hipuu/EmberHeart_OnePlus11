@@ -1,3 +1,4 @@
+
 name: Build OnePlus 11 kernel modules
 
 permissions:
@@ -220,7 +221,7 @@ runs:
         
         CONFIG_ATH9K=m
         CONFIG_ATH9K_HW=m
-        CONFIG_ATH9K_HTC=m
+        CONFIG_ATH9K_HTC=y
         CONFIG_ATH9K_COMMON=m
 
         CONFIG_ATH10K=m
