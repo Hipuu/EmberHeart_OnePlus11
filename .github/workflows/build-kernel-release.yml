@@ -64,32 +64,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          declare -a models=()
-          while IFS= read -r -d '' file; do
-            model=$(basename "$file" .json)
-            models+=("$model")
-          done < <(find configs/ -name "*.json" -print0)
-        
-          if [ ${#models[@]} -eq 0 ]; then
+          
+          if ! ls configs/*.json >/dev/null 2>&1; then
             echo "Error: No config files found in configs/ directory!"
             exit 1
           fi
-        
-          echo "[" > matrix.json
-          for i in "${!models[@]}"; do
-            model="${models[$i]}"
-            file="configs/$model.json"
-            if [ -f "$file" ]; then
-              jq -r '.' "$file" >> matrix.json
-              if [ $((i+1)) -lt ${#models[@]} ]; then
-                echo "," >> matrix.json
-              fi
-            fi
-          done
-          echo "]" >> matrix.json
-        
-          filtered=$(jq -c '.' matrix.json)
-          wrapped=$(jq -n --argjson items "$filtered" '{ include: $items }')
+
+          wrapped=$(jq -s -c '{include: .}' configs/*.json)
         
           echo "matrix<<MATRIX_EOF" >> "$GITHUB_OUTPUT"
           echo "$wrapped" >> "$GITHUB_OUTPUT"
