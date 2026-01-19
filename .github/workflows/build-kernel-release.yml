@@ -54,10 +54,6 @@ jobs:
     steps:
       - name: Checkout Code (to access configs/)
         uses: actions/checkout@v4
-        with:
-          sparse-checkout: |
-            configs/
-          sparse-checkout-cone-mode: false
 
       - name: Setup OnePlus Model
         id: set-matrix
@@ -71,6 +67,13 @@ jobs:
           fi
 
           wrapped=$(jq -s -c '{include: .}' configs/*.json)
+          
+          # Validate that we have at least one config
+          count=$(echo "$wrapped" | jq '.include | length')
+          if [ "$count" -eq 0 ]; then
+            echo "Error: Generated matrix is empty!"
+            exit 1
+          fi
         
           echo "matrix<<MATRIX_EOF" >> "$GITHUB_OUTPUT"
           echo "$wrapped" >> "$GITHUB_OUTPUT"
